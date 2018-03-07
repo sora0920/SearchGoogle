@@ -1,0 +1,22 @@
+#!/bin/sh
+web="vivaldi-snapshot"
+
+if [ -z "$1" ]; then # 空打ちかの判定
+  if [ ! -t 0 ]; then # パイプの判定
+    $web "https://google.co.jp/search?q=$(cat -)" 
+  else
+    echo "Please Input Search Text"
+    read text
+    if [ ! -z "$text" ]; then
+      $web "https://google.co.jp/search?q=$text"
+    else
+      echo "Error!"
+      exit 1
+    fi
+  fi
+else
+  $web "https://google.co.jp/search?q=$1" 
+fi
+
+
+exit 0
